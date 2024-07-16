@@ -1,17 +1,13 @@
 package main
 
 import (
-	"net/http"
+	"schmo_login_go/api"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	api.SetupRoutes(r)
 	r.Run()
 }
