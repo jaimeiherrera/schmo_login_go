@@ -15,13 +15,13 @@ func SetupRoutes(router *gin.Engine) {
 	{
 		v1.GET("/ping", handlers.Ping)
 
-		// users := v1.Group("/users", middleware.Authenticate)
-		// {
-		// 	users.GET("/", handlers.ListUsers)
-		// 	users.POST("/", handlers.CreateUser)
-		// 	users.GET("/:id", handlers.GetUser)
-		// 	users.PUT("/:id", handlers.UpdateUser)
-		// 	users.DELETE("/:id", handlers.DeleteUser)
-		// }
+		users := v1.Group("/users") // users := v1.Group("/users", middleware.Authenticate)
+		{
+			// users.GET("/", handlers.ListUsers)
+			users.POST("/", handlers.CreateUser)
+			// users.GET("/:id", handlers.GetUser)
+			// users.PUT("/:id", handlers.UpdateUser)
+			// users.DELETE("/:id", handlers.DeleteUser)
+		}
 	}
 }
