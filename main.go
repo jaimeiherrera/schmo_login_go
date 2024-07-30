@@ -1,7 +1,7 @@
 package main
 
 import (
-	"schmo_login_go/api"
+	"github.com/jaimeiherrera/schmo_login_go/api"
 
 	"github.com/gin-gonic/gin"
 )
