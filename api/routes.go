@@ -1,27 +1,28 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
-func SetupRoutes(router *gin.Engine) {
-	handlers := NewHandlers()
-
+func SetupRoutes(router *chi.Mux, handlers *Handlers) {
 	// Global middlewares (applied to all routes)
-	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
+	router.Use(middleware.Logger)
+	router.Use(middleware.RequestID)
+	router.Use(middleware.RealIP)
+	router.Use(middleware.Logger)
+	router.Use(middleware.Recoverer)
 
-	v1 := router.Group("/api/v1")
-	{
-		v1.GET("/ping", handlers.Ping)
+	// Routes
+	router.Route("/api/v1", func(r chi.Router) {
+		r.Get("/ping", handlers.Ping)
 
-		// users := v1.Group("/users", middleware.Authenticate)
-		// {
-		// 	users.GET("/", handlers.ListUsers)
-		// 	users.POST("/", handlers.CreateUser)
-		// 	users.GET("/:id", handlers.GetUser)
-		// 	users.PUT("/:id", handlers.UpdateUser)
-		// 	users.DELETE("/:id", handlers.DeleteUser)
-		// }
-	}
+		r.Route("/users", func(r chi.Router) {
+			r.Get("/{id}", handlers.GetUser)
+			r.Get("/", handlers.GetUsers)
+			r.Post("/", handlers.CreateUser)
+			r.Delete("/{id}", handlers.DeleteUser)
+			r.Put("/{id}", handlers.UpdateUser)
+		})
+	})
 }

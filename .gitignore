@@ -21,3 +21,6 @@ schmo_login_go
 # Go workspace file
 go.work
 go.work.sum
+
+# VS Code
+.vscode/
