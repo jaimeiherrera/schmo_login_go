@@ -1,13 +1,17 @@
 package main
 
 import (
-	"github.com/jaimeiherrera/schmo_login_go/api"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/go-chi/chi/v5"
+	"github.com/jaimeiherrera/schmo_login_go/api"
 )
 
 func main() {
-	r := gin.Default()
-	api.SetupRoutes(r)
-	r.Run()
+	r := chi.NewRouter()
+	components := api.NewComponents()
+	handlers := api.NewHandlers(*components)
+	api.SetupRoutes(r, handlers)
+
+	http.ListenAndServe(":3000", r)
 }

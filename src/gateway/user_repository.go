@@ -1,6 +1,8 @@
 package gateway
 
-import entities "github.com/jaimeiherrera/schmo_login_go/src/entity"
+import (
+	entities "github.com/jaimeiherrera/schmo_login_go/src/entity"
+)
 
 type UserRepository interface {
 	FindAll() ([]entities.User, error)

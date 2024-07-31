@@ -13,7 +13,7 @@ type UserAdapter struct {
 	DB db.Database
 }
 
-func NewUserAdapter(database db.Database) gateway.UserRepository {
+func NewUserRepository(database db.Database) gateway.UserRepository {
 	return &UserAdapter{
 		DB: database,
 	}

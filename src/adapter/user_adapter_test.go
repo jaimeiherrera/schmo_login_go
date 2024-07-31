@@ -11,7 +11,7 @@ import (
 func TestUser(t *testing.T) {
 	// TODO: Terminar estos tests
 	localDB := db.NewLocalDB()
-	ua := NewUserAdapter(localDB)
+	ua := NewUserRepository(localDB)
 
 	mockUser := entity.User{
 		FirstName: "test",
