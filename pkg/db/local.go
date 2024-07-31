@@ -7,11 +7,12 @@ type LocalDB struct {
 }
 
 func NewLocalDB() *LocalDB {
-	return &LocalDB{}
+	return &LocalDB{
+		Data: make(map[string]interface{}),
+	}
 }
 
 func (ldb *LocalDB) Set(key string, value interface{}) error {
-	ldb.Data = make(map[string]interface{})
 	ldb.Data[key] = value
 	return nil
 }

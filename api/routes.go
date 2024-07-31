@@ -18,7 +18,11 @@ func SetupRoutes(router *chi.Mux, handlers *Handlers) {
 		r.Get("/ping", handlers.Ping)
 
 		r.Route("/users", func(r chi.Router) {
+			r.Get("/{id}", handlers.GetUser)
+			r.Get("/", handlers.GetUsers)
 			r.Post("/", handlers.CreateUser)
+			r.Delete("/{id}", handlers.DeleteUser)
+			r.Put("/{id}", handlers.UpdateUser)
 		})
 	})
 }
